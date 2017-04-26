@@ -39,6 +39,7 @@ def text_reply(msg):
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO])
 def download_files(msg):
     msg['Text']("%s%s" % (media_dir, msg['FileName']))
+    msg['Text'] = 'download_fn'
     save(msg)
 
 @itchat.msg_register(FRIENDS)
@@ -57,6 +58,7 @@ def system_msg(msg):
 
 @itchat.msg_register([TEXT, MAP, CARD, NOTE, SHARING], isGroupChat=True)
 def qun_text_reply(msg):
+    msg['_type'] = 'qun';
     save(msg)
 
 @itchat.msg_register([PICTURE, RECORDING, ATTACHMENT, VIDEO], isGroupChat=True)
@@ -67,6 +69,8 @@ def qun_download_files(msg):
     #    VIDEO: 'vid', }.get(msg.type, 'fil')
     #print '@%s@%s' % (typeSymbol, msg.fileName)
     msg['Text']("%s%s" % (media_dir, msg['FileName']))
+    msg['Text'] = 'download_fn'
+    msg['_type'] = 'qun';
     save(msg)
 
 itchat.auto_login(hotReload=True)
