@@ -25,7 +25,10 @@ def save(msg):
     file_name = "%s%s.json" % (data_dir, time.strftime('%Y%m%d', time.localtime()))
     out = open(file_name,'a')
     line = "%s\n" % json.dumps(msg, ensure_ascii=False)
-    print type(line)
+    #print type(line)
+    print msg['ActualNickName'] if 'ActualNickName' in msg else msg['FromUserName'], ">>", msg['Text']
+    print '='*100
+    print ''
     out.write(line.encode('utf-8'))
     out.flush()
     out.close()
